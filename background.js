@@ -1,6 +1,7 @@
 var targetUrl = "https://www.youtube.com/*";
 var disable_option = "disable_polymer=true";
-var autoplay_option = "autoplay=1"
+var enable_option = "disable_polymer=false";
+var autoplay_option = "autoplay=1";
 
 function rewriteUrl(req) {
   if (!req.url.includes("disable_polymer") && !req.url.includes("list=WL"))
@@ -8,11 +9,11 @@ function rewriteUrl(req) {
       return { redirectUrl: req.url + "&" + disable_option};
     else
       return { redirectUrl: req.url + "?" + disable_option};
-  else if (!req.url.includes("disable_polymer") && req.url.includes("list=WL"))
+  else 
     if (req.url.includes("?"))
-      return { redirectUrl: req.url + "&" + autoplay_option};
+      return { redirectUrl: req.url + "&" + enable_option};
     else
-      return { redirectUrl: req.url + "?" + autoplay_option};
+      return { redirectUrl: req.url + "?" + enable_option};
 }
 
 browser.webRequest.onBeforeRequest.addListener(
